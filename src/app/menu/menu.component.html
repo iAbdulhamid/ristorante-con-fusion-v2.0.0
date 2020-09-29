@@ -7,22 +7,26 @@
     </div>
   </div>
 
-  <div fxFlex>
+  <div fxFlex class="menu-container">
     <mat-grid-list cols="2" rowHeight="200px">
-      <mat-grid-tile *ngFor="let dish of dishes">
+      <mat-grid-tile class="menu" *ngFor="let dish of dishes">
         <img height="200px" src={{dish.image}} alt={{dish.name}}>
         <mat-grid-tile-footer>
           <h1 matLine> {{dish.name | uppercase}} </h1>
-          <p matLine><span> {{dish.description}} </span></p>
+          <!--<p matLine><span> {{dish.description}} </span></p>-->
         </mat-grid-tile-footer>  
       </mat-grid-tile>
     </mat-grid-list>
   </div>
 
+
+  <app-dish-detail></app-dish-detail>
+
+  <!--
   <div fxFlex *ngIf="selectedDish">
     <mat-card class="example-card">
       <mat-card-header>
-        <mat-card-title>
+        <mat-card-title >
           <h3>{{selectedDish.name | uppercase}}</h3>
         </mat-card-title>
       </mat-card-header>
@@ -32,15 +36,12 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+        <button mat-raised-button color="primary">LIKE</button>
+        <button mat-raised-button color="accent">SHARE</button>
       </mat-card-actions>
     </mat-card>
   </div>
-
-
-
-
+  -->
 
   <!--
   <mat-list fxFlex>
