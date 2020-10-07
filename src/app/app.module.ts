@@ -14,12 +14,14 @@ import { MatButtonModule } from '@angular/material/button';
 import 'hammerjs';
 import { MenuComponent } from './menu/menu.component';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
-import { DishService } from './services/dish.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
+
+import { DishService } from './services/dish.service';
+import { PromotionService } from './services/promotion.service';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { ContactComponent } from './contact/contact.component';
     MatButtonModule
   ],
   providers: [
-    DishService
+    DishService,
+    PromotionService
   ],
   bootstrap: [AppComponent]
 })
