@@ -19,6 +19,7 @@
   </mat-card-content>
 </mat-card>
 
+
 <mat-card *ngIf="promotion" fxFlex>
   <mat-card-header>
     <div mat-card-avatar></div>
@@ -29,6 +30,20 @@
   <img mat-card-image src={{promotion.image}} alt={{promotion.name}}>
   <mat-card-content>
     <p>{{promotion.description}}
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="featuredCorporateLeader" fxFlex>
+  <mat-card-header>
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      <h3>{{featuredCorporateLeader.name | uppercase}}</h3>
+    </mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src={{featuredCorporateLeader.image}} alt={{featuredCorporateLeader.name}}>
+  <mat-card-content>
+    <p>{{featuredCorporateLeader.description}}
     </p>
   </mat-card-content>
 </mat-card>
