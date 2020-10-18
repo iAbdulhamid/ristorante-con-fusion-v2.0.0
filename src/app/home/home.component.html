@@ -5,47 +5,63 @@
      fxLayoutAlign.gt-md="space-around center"
      fxLayoutGap="20px">
 
-<mat-card *ngIf="dish" fxFlex>
-  <mat-card-header>
-    <div mat-card-avatar></div>
-    <mat-card-title>
-      <h3>{{dish.name | uppercase}}</h3>
-    </mat-card-title>
-  </mat-card-header>
-  <img mat-card-image src={{dish.image}} alt={{dish.name}}>
-  <mat-card-content>
-    <p>{{dish.description}}
-    </p>
-  </mat-card-content>
-</mat-card>
+  <mat-card *ngIf="dish" fxFlex>
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>
+        <h3>{{dish.name | uppercase}}</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src={{dish.image}} alt={{dish.name}}>
+    <mat-card-content>
+      <p>{{dish.description}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <div [hidden] = "dish">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
 
 
-<mat-card *ngIf="promotion" fxFlex>
-  <mat-card-header>
-    <div mat-card-avatar></div>
-    <mat-card-title>
-      <h3>{{promotion.name | uppercase}}</h3>
-    </mat-card-title>
-  </mat-card-header>
-  <img mat-card-image src={{promotion.image}} alt={{promotion.name}}>
-  <mat-card-content>
-    <p>{{promotion.description}}
-    </p>
-  </mat-card-content>
-</mat-card>
+  <mat-card *ngIf="promotion" fxFlex>
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>
+        <h3>{{promotion.name | uppercase}}</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src={{promotion.image}} alt={{promotion.name}}>
+    <mat-card-content>
+      <p>{{promotion.description}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <div [hidden] = "promotion">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
 
-<mat-card *ngIf="featuredCorporateLeader" fxFlex>
-  <mat-card-header>
-    <div mat-card-avatar></div>
-    <mat-card-title>
-      <h3>{{featuredCorporateLeader.name | uppercase}}</h3>
-    </mat-card-title>
-  </mat-card-header>
-  <img mat-card-image src={{featuredCorporateLeader.image}} alt={{featuredCorporateLeader.name}}>
-  <mat-card-content>
-    <p>{{featuredCorporateLeader.description}}
-    </p>
-  </mat-card-content>
-</mat-card>
+
+  <mat-card *ngIf="featuredCorporateLeader" fxFlex>
+    <mat-card-header>
+      <div mat-card-avatar></div>
+      <mat-card-title>
+        <h3>{{featuredCorporateLeader.name | uppercase}}</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src={{featuredCorporateLeader.image}} alt={{featuredCorporateLeader.name}}>
+    <mat-card-content>
+      <p>{{featuredCorporateLeader.description}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <div [hidden] = "featuredCorporateLeader">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+
 
 </div>
+<!--
+<div [hidden] = "dish && promotion && featuredCorporateLeader">
+  <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+</div>
+-->
