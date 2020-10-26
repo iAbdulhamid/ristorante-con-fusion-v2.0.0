@@ -57,4 +57,9 @@ export class DishService {
   getDishIds(): Observable<string[] | any> {
     return of(DISHES.map(dish => dish.id ));
   }
+
+  putDish(dishCopy: Dish): Observable<Dish> {
+    DISHES.push(dishCopy);
+    return of (DISHES.filter((dish) => dish.id === dishCopy.id))[0];
+  }
 }
