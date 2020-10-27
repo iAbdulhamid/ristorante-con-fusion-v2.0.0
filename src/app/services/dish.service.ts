@@ -4,7 +4,7 @@ import { catchError, delay, map } from 'rxjs/operators';
 import { Dish } from '../shared/dish';
 import { DISHES } from '../shared/dishes';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 
@@ -68,8 +68,16 @@ export class DishService {
     return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id))).pipe(catchError(error => error));
   }
 
-  putDish(dishCopy: Dish): Observable<Dish> {
-    DISHES.push(dishCopy);
-    return of (DISHES.filter((dish) => dish.id === dishCopy.id))[0];
+  putDish(dish: Dish): Observable<Dish> {
+    //DISHES.push(dishCopy);
+    //return of (DISHES.filter((dish) => dish.id === dishCopy.id))[0];
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.put<Dish>(baseURL + 'dishes/' + dish.id, dish, httpOptions)
+      .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 }

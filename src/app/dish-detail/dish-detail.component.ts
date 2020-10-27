@@ -110,7 +110,7 @@ export class DishDetailComponent implements OnInit {
       .subscribe(dish => {
           this.dish = dish;
           this.dishCopy = dish;
-        } ,
+        },
         errmess => {
           this.dish = null;
           this.dishCopy = null;
