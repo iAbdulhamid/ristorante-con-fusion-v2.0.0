@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -36,7 +36,7 @@ export class DishDetailComponent implements OnInit {
   };
 
   validationMessages = {
-    'name': {
+    'author': {
       'required':      'Author Name is required.',
       'minlength':     'Author Name must be at least 2 characters long.',
       'maxlength':     'Author Name cannot be more than 25 characters long.'
@@ -53,6 +53,7 @@ export class DishDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private location: Location,
               private fb: FormBuilder,
+              @Inject('BaseURL') private BaseURL
               ) { 
                 this.createForm();
                }
