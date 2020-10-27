@@ -67,7 +67,8 @@ export class DishDetailComponent implements OnInit {
         this.dish = dish; 
         this.dishCopy = dish;
         this.setPrevNext(dish.id); 
-      });
+      },
+      errmess => this.errMess = <any>errmess);
 
     //this.dish = this.dishservice.getDish(id);
     //this.dishservice.getDish(id)

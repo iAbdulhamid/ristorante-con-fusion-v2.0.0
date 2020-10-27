@@ -15,8 +15,15 @@ export class HomeComponent implements OnInit {
 
 
   dish: Dish;
+  dishErrMess: string;
+
   promotion: Promotion;
+  promErrMess: string;
+
   featuredCorporateLeader: Leader;
+  leaderErrMess: string;
+
+  
 
   constructor(private dishservice: DishService,
               private promotionservice: PromotionService,
@@ -31,7 +38,8 @@ export class HomeComponent implements OnInit {
     //  .then(dish => this.dish = dish);
 
     this.dishservice.getFeaturedDish()
-      .subscribe(dish => this.dish = dish);
+      .subscribe(dish => this.dish = dish,
+        errmess => this.dishErrMess = <any>errmess);
 
 
 
@@ -41,7 +49,8 @@ export class HomeComponent implements OnInit {
     //  .then(promotion => this.promotion = promotion);
     
     this.promotionservice.getFeaturedPromotion()
-      .subscribe(promotion => this.promotion = promotion);
+      .subscribe(promotion => this.promotion = promotion,
+        errmess => this.promErrMess = <any>errmess);
 
 
 
@@ -51,7 +60,8 @@ export class HomeComponent implements OnInit {
     //.then(featuredCorporateLeader => this.featuredCorporateLeader = featuredCorporateLeader);
 
     this.leaderService.getFeaturedLeader()
-      .subscribe(featuredCorporateLeader => this.featuredCorporateLeader = featuredCorporateLeader);
+      .subscribe(featuredCorporateLeader => this.featuredCorporateLeader = featuredCorporateLeader,
+        errmess => this.leaderErrMess = <any>errmess);
   }
 
 }

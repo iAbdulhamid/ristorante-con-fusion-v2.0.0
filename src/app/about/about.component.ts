@@ -11,6 +11,7 @@ export class AboutComponent implements OnInit {
  
   leaders: Leader[];
   selectedLeader: Leader;
+  leaderErrMess: string;
 
   constructor( private leaderService: LeaderService) { }
 
@@ -21,7 +22,8 @@ export class AboutComponent implements OnInit {
     //  .then( leaders => this.leaders = leaders);
 
     this.leaderService.getLeaders()
-      .subscribe( leaders => this.leaders = leaders);
+      .subscribe( leaders => this.leaders = leaders,
+        errmess => this.leaderErrMess = errmess);
   }
 
   onSelect(leader: Leader) {
