@@ -7,12 +7,26 @@ import { DishService } from '../services/dish.service';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 
 @Component({
   selector: 'app-dish-detail',
   templateUrl: './dish-detail.component.html',
-  styleUrls: ['./dish-detail.component.scss']
+  styleUrls: ['./dish-detail.component.scss'],
+  animations: [
+    trigger('visibility', [
+        state('shown', style({
+            transform: 'scale(1.0)',
+            opacity: 1
+        })),
+        state('hidden', style({
+            transform: 'scale(0.7)',
+            opacity: 0
+        })),
+        transition('* => *', animate('0.5s ease-in-out'))
+    ])
+  ]
 })
 export class DishDetailComponent implements OnInit {
 
@@ -23,6 +37,7 @@ export class DishDetailComponent implements OnInit {
   prev: string;
   next: string;
   errMess: string;
+  visibility = 'shown';
   
   @ViewChild('fform') commentFormDirective;
   commentForm: FormGroup;
@@ -62,13 +77,18 @@ export class DishDetailComponent implements OnInit {
     //let id = this.route.snapshot.params['id'];
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
 
-    this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-      .subscribe(dish => { 
-        this.dish = dish; 
-        this.dishCopy = dish;
-        this.setPrevNext(dish.id); 
-      },
-      errmess => this.errMess = <any>errmess);
+    this.route.params.pipe(switchMap((params: Params) => {
+      this.visibility = 'hidden'; 
+      return this.dishservice.getDish(params['id'])
+    }))
+    .subscribe(dish => { 
+      this.dish = dish; 
+      this.dishCopy = dish;
+      this.setPrevNext(dish.id);
+      this.visibility = 'shown'; 
+    },
+    errmess => this.errMess = <any>errmess);
+
 
     //this.dish = this.dishservice.getDish(id);
     //this.dishservice.getDish(id)
