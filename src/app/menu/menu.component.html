@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div fxFlex class="menu-container" *ngIf="dishes">
+  <div fxFlex class="menu-container" *ngIf="dishes" [@expand]>
     <mat-grid-list cols="2" rowHeight="200px">
       <!--<mat-grid-tile class="menu" *ngFor="let dish of dishes" (click) = "onSelect(dish)">-->
       <mat-grid-tile class="menu" *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]" appHighlight>

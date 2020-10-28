@@ -1,18 +1,32 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { expand, flyInOut } from '../animations/animations';
+import { FeedbackService } from '../services/feedback.service';
 import { ContactType, Feedback } from '../shared/feedback';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+    },
+  animations: [
+    flyInOut(),
+    expand()
+  ]
+  
 })
 export class ContactComponent implements OnInit {
 
   feedbackForm: FormGroup;
   feedback: Feedback;
+  feedbackCopy: Feedback;
   contactType = ContactType;
+  errMess: string;
+  load: boolean;
 
   @ViewChild('fform') feedbackFormDirective;
 
@@ -44,7 +58,8 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private feedbackService: FeedbackService) {
     this.createForm();
   }
 
@@ -70,18 +85,32 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.feedback = this.feedbackForm.value;
+    this.feedbackCopy = this.feedbackForm.value;
     console.log(this.feedback);
-    this.feedbackForm.reset({
-      firstname: '',
-      lastname: '',
-      telnum: '',
-      email: '',
-      agree: false,
-      contacttype: 'None',
-      message: ''
-    });
-    this.feedbackFormDirective.resetForm();
+    this.load = true;
+    //this.comment.date = new Date().toISOString();
+    //this.dishCopy.comments.push(this.comment);
+    this.feedbackService.postFeedback(this.feedbackCopy) 
+      .subscribe(feed => {
+        this.feedback = feed;
+        this.load = false;
+        setTimeout(() => {this.feedback = null; }, 5000);
+        },
+        errmess => {
+          this.errMess = <any>errmess;
+          this.load = false;
+        });
+
+        this.feedbackForm.reset({
+          firstname: '',
+          lastname: '',
+          telnum: '',
+          email: '',
+          agree: false,
+          contacttype: 'None',
+          message: ''
+        });
+        this.feedbackFormDirective.resetForm();
   }
 
   onValueChanged(data?: any) {

@@ -65,7 +65,7 @@
     <h2>Corporate Leadership</h2>
     <!--<p>Display the details of the corporate leaders here</p>-->
     <div>
-        <mat-list *ngIf="leaders">
+        <mat-list *ngIf="leaders" [@expand]> 
             <div *ngFor="let leader of leaders">
                 
                 <div fxLayout="row" fxLayoutGap="20px" >
